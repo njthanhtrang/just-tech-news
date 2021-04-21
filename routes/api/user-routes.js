@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const { User } = require("../../models/");
 
-// GET /api/users
+// GET all users /api/users
 router.get("/", (req, res) => {
     // Access our User model and run .findAll() method
     // .findAll() queries all users from user table, equiv to SELECT*FROM users;
+    // returns an array of data
     User.findAll({
         attributes: { exclude: ["password"] }
     })
@@ -17,8 +18,9 @@ router.get("/", (req, res) => {
 
 // GET /api/users/1
 router.get("/:id", (req, res) => {
+    // returns single object of data
     User.findOne({
-        attributes: { exclide: ["password"] },
+        attributes: { exclude: ["password"] },
         // equiv to SELECT*FROM users WQHERE id=1
         where: {
             id: req.params.id
@@ -59,7 +61,7 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
     // expects {username: "Lernantino", email: "lernantino@gmail.com", password: "password1234"}
 
-    // if req.body has exact key/value pairs to match the model, just use "req.body"
+    // if req.body has exact key/value pairs to match the model, just use "req.body" to update what's passed through
     // equiv to UPDATE users SET username = "Lernantino", email = "lernantino@gmail.com", password = "newPassword1234" WHERE id = 1;
     User.update(req.body, {
         where: {

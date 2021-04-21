@@ -33,7 +33,7 @@ User.init(
       // there cannot be any duplicate email values in table
       unique: true,
       // if allowNull is set to false, we can run our data through validators before creating table data
-    //   validate email data follows pattern of email address <string>@<string>.<string>
+      //   validate email data follows pattern of email address <string>@<string>.<string>
       validate: {
         isEmail: true,
       },
