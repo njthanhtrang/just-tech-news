@@ -6,8 +6,8 @@ require("dotenv").config();
 
 // create connection to our DB, pass in MySQL info for user and pass
 // new Sequelize accepts DB name, MySQL user, and pass, pass config settings
-const sequelize = new Sequelize(process.env.DB_name, process.env.DB_USER, process.env.DB_PW, {
-    host: "root",
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
+    host: "localhost",
     dialect: "mysql",
     port: 3306
 });
