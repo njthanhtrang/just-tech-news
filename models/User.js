@@ -1,7 +1,7 @@
 // import Model class and Datatypes obj from sequelize
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
 const bcrypt = require("bcrypt");
+const sequelize = require("../config/connection");
 
 // create our User model, uses extends keyword so User inherits Model fx
 class User extends Model {
