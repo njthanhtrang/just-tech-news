@@ -27,6 +27,7 @@ router.get("/:id", (req, res) => {
         }
     })
     // if search for user with no ID value, send 404
+    // dbUserData = user retrieved from database
     .then(dbUserData => {
         if(!dbUserData) {
             res.status(404).json({ message: "No user found with this id" });
@@ -54,6 +55,30 @@ router.post("/", (req, res) => {
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
+    });
+});
+
+router.post("/login", (req, res) => {
+    // expects {email: "lernantino@gmail.com", password: "password1234"}
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+        // result of query passed as dbUserData
+    }).then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({ message: "No user with that email address!" });
+            return;
+        }
+        // res.json({ user: dbUserData });
+
+        // Verify user, returns boolean
+        const validPassword = dbUserData.checkPassword(req.body.password);
+        if (!validPassword) {
+            res.status(400).json({ message: "Incorrect password!" });
+            return;
+        }
+        res.json({ user: dbUserData, message: "You are now logged in!" });
     });
 });
 
