@@ -64,6 +64,8 @@ router.put("/:id", (req, res) => {
     // if req.body has exact key/value pairs to match the model, just use "req.body" to update what's passed through
     // equiv to UPDATE users SET username = "Lernantino", email = "lernantino@gmail.com", password = "newPassword1234" WHERE id = 1;
     User.update(req.body, {
+        // to use beforeUpdate hash
+        individualHooks: true,
         where: {
             id: req.params.id
         }
