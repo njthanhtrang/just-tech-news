@@ -3,19 +3,21 @@ const sequelize = require("../config/connection");
 
 class Vote extends Model {}
 
-Vote.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  //   when user votes on post, insert new row of data listing primary key of user
-  user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: "user",
-      key: "id",
+Vote.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    //   when user votes on post, insert new row of data listing primary key of user
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+      },
     },
     // and primary key of post they voted on
     post_id: {
@@ -27,11 +29,13 @@ Vote.init({
       },
     },
   },
-  sequelize,
-  timestamps: false,
-  freezeTableName: true,
-  underscored: true,
-  modelName: "vote",
-});
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "vote",
+  }
+);
 
 module.exports = Vote;
