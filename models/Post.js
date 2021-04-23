@@ -38,6 +38,8 @@ Post.init(
   {
     sequelize,
     freezeTableName: true,
+    // define column names to have underscore naming convention
+    // in Sequelize, columns are camelcase by default
     underscored: true,
     modelName: "post",
   }
