@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Tech News</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>
+                <a href="/">Just Tech News</a>
+            </h1>
+        </header>
+        <main>
+            {{!-- 2 curlies convert HTML into strings (< becomes &lt;) --}}
+            {{!-- 3 curlies renders data as HTML --}}
+                {{{ body }}} </main>
+                <footer>
+                    Thanks for visiting!
+                </footer>
+    </div>
+
+</body>
+
+</html>
+
+{{!-- ALWAYS have main layout @ views/layouts/main.handlebars --}}
+{{!-- other template files go directly in views folder @ views/welcome.handlebars--}}

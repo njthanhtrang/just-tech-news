@@ -6,6 +6,7 @@ router.get("/", (req, res) => {
   Comment.findAll({
     attributes: ["id", "comment_text", "user_id", "post_id"],
     order: [["created at", "DESC"]],
+    // include is Sequelize's JOIN
     include: [
         {
             model: User,

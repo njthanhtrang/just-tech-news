@@ -6,13 +6,14 @@ require("dotenv").config();
 
 // create connection to our DB, pass in MySQL info for user and pass
 // new Sequelize accepts DB name, MySQL user, and pass, pass config settings
+// sequelize MUST be declared with let, not const
 let sequelize;
 
 // when app is deployed, has access to process.env.JAWSDB_URL
 // otherwise, uses localhost config
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
-  
+
 } else {
   sequelize = new Sequelize(
     process.env.DB_NAME,
