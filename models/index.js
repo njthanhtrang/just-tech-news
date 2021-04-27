@@ -1,5 +1,6 @@
-const User = require("./User");
+// import all models
 const Post = require("./Post");
+const User = require("./User");
 const Vote = require("./Vote");
 const Comment = require("./Comment");
 
@@ -12,6 +13,7 @@ User.hasMany(Post, {
 // One to one relationship
 Post.belongsTo(User, {
     foreignKey: "user_id",
+    onDelete: "SET NULL"
 });
 
 // Many to many relationship
@@ -21,21 +23,25 @@ User.belongsToMany(Post, {
     as: "voted_posts",
     // foriegn key constraint:
     // unique pairing to protect from a single user voting on 1 post multiple times
-    foreignKey: "user_id"
+    foreignKey: "user_id",
+    onDelete: "SET NULL"
 });
 
 Post.belongsToMany(User, {
     through: Vote,
     as: "voted_posts",
-    foreignKey: "post_id"
+    foreignKey: "post_id",
+    onDelete: "SET NULL"
 });
 
 Vote.belongsTo(User, {
-    foreignKey: "user_id"
+    foreignKey: "user_id",
+    onDelete: "SET NULL"
 });
 
 Vote.belongsTo(Post, {
-    foreignKey: "post_id"
+    foreignKey: "post_id",
+    onDelete: "SET NULL"
 });
 
 User.hasMany(Vote, {
@@ -49,15 +55,18 @@ Post.hasMany(Vote, {
 // we don't have to specify comment as a through table
 // we don't need to access Post through Comment
 Comment.belongsTo(User, {
-    foreignKey: "user_id"
+    foreignKey: "user_id",
+    onDelete: "SET NULL"
 });
 
 Comment.belongsTo(Post, {
-    foreignKey: "post_id"
+    foreignKey: "post_id",
+    onDelete: "SET NULL"
 });
 
 User.hasMany(Comment, {
-    foreignKey: "user_id"
+    foreignKey: "user_id",
+    onDelete: "SET NULL"
 });
 
 Post.hasMany(Comment, {

@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const { Post, User, Vote, Comment } = require("../../models");
 const sequelize = require("../../config/connection");
+const { Post, User, Vote, Comment } = require("../../models");
 
-// get /api/posts
+// get all users at /api/posts
 router.get("/", (req, res) => {
   Post.findAll({
     // latest posted articles appear first
@@ -57,7 +57,7 @@ router.get("/:id", (req, res) => {
       "created_at",
       [
         sequelize.literal(
-          "(SELECT COUNT (*) FROM vote WHERE post.id = vote.post_id)"
+          "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
         ),
         "vote_count",
       ],

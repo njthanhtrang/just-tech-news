@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const { sequelize } = require("sequelize/lib/model");
-const { Comment, User } = require("../../models");
+const { Comment } = require("../../models");
 
 router.get("/", (req, res) => {
   Comment.findAll({
@@ -8,10 +7,10 @@ router.get("/", (req, res) => {
     order: [["created at", "DESC"]],
     // include is Sequelize's JOIN
     include: [
-        {
-            model: User,
-            attributes: ["username"],
-        }
+      {
+        model: User,
+        attributes: ["username"],
+      },
     ],
   })
     .then((dbCommentData) => res.json(dbCommentData))
@@ -23,7 +22,8 @@ router.get("/", (req, res) => {
 
 // /api/comments
 router.post("/", (req, res) => {
-    console.log("Route hit");
+  // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
+  console.log("Route hit");
   Comment.create({
     comment_text: req.body.comment_text,
     user_id: req.body.user_id,

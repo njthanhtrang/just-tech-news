@@ -1,8 +1,10 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { Post, User, Comment } = require("../models");
+const { Post, User, Comment, Vote } = require("../models");
 
+// get all posts for homepage
 router.get("/", (req, res) => {
+  console.log("======================");
   Post.findAll({
     attributes: [
       "id",
@@ -35,7 +37,6 @@ router.get("/", (req, res) => {
       // pass single post obj into homepage template
       // because we're using template engine, use res.render()
       // specify which template we want to use (homepage.handlebars), .handlebars ext implied
-      console.log(dbPostData[0]);
       //   loop over and map each Sequelize obj into serialized version, saving results in a new posts array
       const posts = dbPostData.map((post) => post.get({ plain: true }));
       //   serialize obj down to properties you need with get()
@@ -47,6 +48,11 @@ router.get("/", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+});
+
+router.get("/login", (req, res) => {
+    // login doesn't need variables so no second argument to render()
+    res.render("login");
 });
 
 module.exports = router;
