@@ -91,6 +91,47 @@ router.post("/", (req, res) => {
     });
 });
 
+router.post('/login', (req, res) => {
+    // expects {email: 'lernantino@gmail.com', password: 'password1234'}
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(dbUserData => {
+    if (!dbUserData) {
+      res.status(400).json({ message: 'No user with that email address!' });
+      return;
+    }
+
+    const validPassword = dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: 'Incorrect password!' });
+      return;
+    }
+
+    req.session.save(() => {
+      // declare session variables
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+
+      res.json({ user: dbUserData, message: 'You are now logged in!' });
+    });
+  });
+});
+
+router.post("/logout", (req, res) => {
+  if (req.session.loggedIn) {
+    // destroy session variable, reset cookie
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
 // update with PUT /api/users/1
 router.put("/:id", (req, res) => {
   // expects {username: "Lernantino", email: "lernantino@gmail.com", password: "password1234"}
@@ -98,12 +139,13 @@ router.put("/:id", (req, res) => {
   // if req.body has exact key/value pairs to match the model, just use "req.body" to update what's passed through
   // equiv to UPDATE users SET username = "Lernantino", email = "lernantino@gmail.com", password = "newPassword1234" WHERE id = 1;
   User.update(req.body, {
+    individualHooks: true,
     where: {
       id: req.params.id,
     },
   })
     .then((dbUserData) => {
-      if (!dbUserData[0]) {
+      if (!dbUserData) {
         res.status(404).json({ message: "No user found with this id" });
         return;
       }
