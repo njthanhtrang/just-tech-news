@@ -16,7 +16,7 @@ Post.belongsTo(User, {
     onDelete: "SET NULL"
 });
 
-// Many to many relationship
+// // Many to many relationship
 User.belongsToMany(Post, {
     through: Vote,
     // name of vote model should be displayed as voted_posts

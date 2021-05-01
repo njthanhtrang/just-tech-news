@@ -35,7 +35,7 @@ Vote.init(
     freezeTableName: true,
     underscored: true,
     modelName: "vote",
-  }
+  },
 );
 
 module.exports = Vote;

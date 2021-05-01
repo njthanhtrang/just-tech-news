@@ -1,0 +1,15 @@
+<article class="post">
+      <div class="title">
+          {{!-- double curlies used for HTML attributes --}}
+        <a href="{{post_url}}" target="_blank">{{title}}</a>
+        <span>({{format_url post_url}})</span>
+      </div>
+      <div class="meta">
+          {{!-- double curlies used for content --}}
+        {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
+        {{format_date created_at}}
+        |
+        {{!-- word, amount --}}
+        <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+      </div>
+    </article>
