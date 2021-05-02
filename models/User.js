@@ -2,7 +2,6 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 const bcrypt = require("bcrypt");
-const { beforeCreate, beforeUpdate } = require("./Post");
 
 // create our User model, uses extends keyword so User inherits Model fx
 class User extends Model {

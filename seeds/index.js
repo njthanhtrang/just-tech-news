@@ -8,7 +8,6 @@ const sequelize = require('../config/connection');
 const seedAll = async () => {
   await sequelize.sync({ force: true });
   console.log('--------------');
-  console.log("attempting to seed user");
   await seedUsers();
   console.log('--------------');
 

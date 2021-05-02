@@ -13,7 +13,6 @@ Vote.init(
     //   when user votes on post, insert new row of data listing primary key of user
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: "user",
         key: "id",
@@ -22,7 +21,6 @@ Vote.init(
     // and primary key of post they voted on
     post_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: "post",
         key: "id",

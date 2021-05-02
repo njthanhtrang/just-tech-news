@@ -16,6 +16,7 @@
             </h1>
             <nav>
                 {{#if loggedIn}}
+                <a href="/dashboard">dashboard</a>
                 <button id="logout" class="btn-no-style">logout</button>
                 {{else}}
                 <a href="/login">login</a>
@@ -23,17 +24,16 @@
             </nav>
         </header>
         <main>
-            {{!-- 2 curlies convert HTML into strings (< becomes &lt;) --}}
-            {{!-- 3 curlies renders data as HTML --}}
+            {{!-- 2 curlies convert HTML into strings (< becomes &lt;) --}} {{!-- 3 curlies renders data as HTML --}}
                 {{{ body }}} </main>
                 <footer>
                     Thanks for visiting!
                 </footer>
     </div>
 
-{{#if loggedIn}}
-<script src="/javascript/logout.js"></script>
-{{/if}}
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
 </body>
 
 </html>
